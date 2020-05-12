@@ -1,0 +1,25 @@
+body{
+    background-color: #F8F9FD;
+}
+
+#registerTitle{
+    display: inline-block;
+    font-size: 20px;
+    color: #563F83;
+    border-bottom: 2px solid #7A55B7;
+}
+input{
+border: none;
+width: 100% ;
+}
+button{
+    background-color: #8764C2;
+    border-radius: 22px;
+    width: 200px;
+    border: none;
+    color: #FFFFFF;
+    line-height: 3;
+}
+.input{
+    background-color: #FFFFFF
+}

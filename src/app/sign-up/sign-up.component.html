@@ -1,0 +1,58 @@
+<div class="d-block text-center">
+  <p #registerTitle id="registerTitle" class="text-center mx-2">Register</p>
+  <a #registerTitle id="registerTitle" class="text-center mx-2" href="/log-in">Login</a>
+</div>
+<div class="input d-block mx-auto my-3 text-left w-25 form-group">
+  <p>
+    <svg
+      class="bi bi-person-fill"
+      width="1em"
+      height="1em"
+      viewBox="0 0 16 16"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z"
+        clip-rule="evenodd"
+      />
+    </svg>
+    Username
+  </p>
+  <input
+  type="string"
+    [(ngModel)]="login"
+    placeholder="Tom"
+  />
+</div>
+<div class="input d-block mx-auto my-3 text-left w-25">
+  <p>
+    <svg
+      class="bi bi-lock-fill"
+      width="1em"
+      height="1em"
+      viewBox="0 0 16 16"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="11" height="9" x="2.5" y="7" rx="2" />
+      <path
+        fill-rule="evenodd"
+        d="M4.5 4a3.5 3.5 0 117 0v3h-1V4a2.5 2.5 0 00-5 0v3h-1V4z"
+        clip-rule="evenodd"
+      />
+    </svg>
+    Password
+  </p>
+  <input
+    type="password"
+    [(ngModel)]="password"
+    placeholder="password"
+  />
+</div>
+<button class="mx-auto d-block" type="submit" (click)="getJWT()">
+  Register
+</button>
+
+
