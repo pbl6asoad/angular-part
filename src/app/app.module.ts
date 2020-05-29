@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MinimazeProfileComponent } from './minimaze-profile/minimaze-profile.component';
 import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './store/reducers/users.reducers';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { StoreModule } from '@ngrx/store';
     MatIconModule,
     MatSidenavModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ count: counterReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent],
