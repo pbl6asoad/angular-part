@@ -24,7 +24,11 @@
   type="string"
     [(ngModel)]="login"
     placeholder="Tom"
+    (keyup)="search()"
   />
+  <p class="alert alert-danger" *ngIf="login.length <= 3 && login.length  > 0">Слишком короткое имя</p>
+  <p class="alert alert-danger" *ngIf="result">Пользователь с таким логином существует</p>
+  <p class="alert alert-danger" *ngIf="login.length === 0">Введите имя пользователя</p>
 </div>
 <div class="input d-block mx-auto my-3 text-left w-25">
   <p>
@@ -49,11 +53,12 @@
     type="password"
     [(ngModel)]="password"
     placeholder="password"
+    (keyup)="isDisabledBtn()"
   />
 </div>
-<button class="mx-auto d-block" type="submit" (click)="getJWT()">
+<button class="mx-auto d-block" [ngClass]="disabledBtn === false ? 'disabled' : ''" type="submit" (click)="getJWT()" [disabled]="!disabledBtn">
   Register
 </button>
 
-
-<button (click)="log()">Log reducer</button>
+<!-- 
+<button (click)="log()">Log reducer</button> -->

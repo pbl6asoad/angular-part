@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {
   HttpClient
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { log } from '../store/actions/users.actions';
+import { authorize, unauthorize } from '../store/actions/users.actions';
+import { getIsAuth} from '../store/reducers/users.reducers'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,15 +13,40 @@ import { log } from '../store/actions/users.actions';
   styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent implements OnInit {
-  login: string;
+  token: string
+  login: string
   password: string;
-  count$: Observable<string>
-  constructor(private store: Store<{ count: string }>, private http: HttpClient) {
-    this.count$ = store.pipe(select('count'));
+  result: Object
+  disabledBtn: boolean = false
+  constructor(private store: Store<{ isAuthorized: boolean, token: string }>, private http: HttpClient, private router: Router) {
+    this.store.pipe(select(getIsAuth)).subscribe(vl => console.log(vl))
+  }
+  disableBtn(){
+    if ( this.login.length > 3 && !this.result && this.password ) {
+      this.disabledBtn = true
+    }
+    else this.disabledBtn = false
   }
   configUrl = 'http://localhost:5000/users/signup';
+  isDisabledBtn() {
+    this.disableBtn()
+  }
+  search(){
+    return this.http.get(this.configUrl + '/' + this.login).subscribe((data) => {
+      this.result = data
+      console.log(data);
+      if ( data === false ) {
+        this.disableBtn()
+      } else {
+        this.disabledBtn = false
+      }
+    });
+    
+    
+  }
   log(){
-    this.store.dispatch(log());
+    console.log(this.store);
+    // this.store.dispatch(log());
   }
   getJWT() {
     const body = {
@@ -31,8 +57,16 @@ export class SignUpComponent implements OnInit {
     return this.http.post(this.configUrl, body).subscribe((data) => {
       localStorage.setItem('jwtToken', data['token']);
       localStorage.setItem('login', data['login']);
-      console.log(data);
+      // console.log(data);
+      this.store.dispatch(authorize({token: data['token'], login: data['login']}));
+      this.router.navigate(['/']);
     });
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if ( localStorage.getItem('jwtToken') )  {
+      this.login = localStorage.getItem('login')
+      this.token = localStorage.getItem('jwtToken')
+      this.store.dispatch(authorize({token: this.token, login: this.login}));
+    }
+  }
 }

@@ -1,0 +1,19 @@
+<button class="w-25 mx-auto" (click)="createPost()">Create new post</button>
+<div class="container">
+  <div class="row">
+    <div class="card text-center col-12 px-0" *ngFor="let post of posts">
+      <div class="card-header">
+        Title: {{ post.title }}
+      </div>
+      <div class="card-body px-0 row">
+        <img src="http://localhost:5000/{{ post.img }}" alt="" class="col-3" />
+        <p class="card-text col-9 text-left">
+            Description: {{ post.description }}
+        </p>
+      </div>
+      <div class="card-footer text-muted">
+        {{ post.time | date: "medium" }}, author: {{ post.author }}
+      </div>
+    </div>
+  </div>
+</div>
