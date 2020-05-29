@@ -23,3 +23,11 @@ button{
 .input{
     background-color: #FFFFFF
 }
+p, a{
+    margin-bottom: 0;
+    padding-bottom: 12px;
+}
+.disabled{
+    background-color: gray;
+    color: black;
+}

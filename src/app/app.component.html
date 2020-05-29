@@ -7,14 +7,17 @@
     </div>
     <mat-menu #animals="matMenu">
       <a routerLink="/" routerLinkActive="active" class="d-block">home</a>
-      <a routerLink="/log-in" routerLinkActive="active" class="d-block"
+      <a *ngIf="!isAuthorized" routerLink="/log-in" routerLinkActive="active" class="d-block"
         >login</a
       >
-      <a routerLink="/sign-up" routerLinkActive="active" class="d-block"
+      <a *ngIf="!isAuthorized" routerLink="/sign-up" routerLinkActive="active" class="d-block"
         >sign-up</a
       >
       <a routerLink="/profile" routerLinkActive="active" class="d-block"
         >profile</a
+      >
+      <a routerLink="/posts" routerLinkActive="active" class="d-block"
+        >posts</a
       >
     </mat-menu>
 

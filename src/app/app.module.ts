@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,7 +19,14 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MinimazeProfileComponent } from './minimaze-profile/minimaze-profile.component';
 import { StoreModule } from '@ngrx/store';
-import { counterReducer } from './store/reducers/users.reducers';
+import { userReducer } from './store/reducers/users.reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { PostsComponent } from './posts/posts.component'; // Angular CLI environment
+import localeRu from '@angular/common/locales/ru';
+import { PostCreateComponent } from './post-create/post-create.component';
+
+registerLocaleData(localeRu, 'ru');
 
 @NgModule({
   declarations: [
@@ -29,6 +37,8 @@ import { counterReducer } from './store/reducers/users.reducers';
     HomeComponent,
     ProfileComponent,
     MinimazeProfileComponent,
+    PostsComponent,
+    PostCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,9 +53,15 @@ import { counterReducer } from './store/reducers/users.reducers';
     MatIconModule,
     MatSidenavModule,
     AppRoutingModule,
-    StoreModule.forRoot({ count: counterReducer }),
+    StoreModule.forRoot({ user: userReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: "ru" }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

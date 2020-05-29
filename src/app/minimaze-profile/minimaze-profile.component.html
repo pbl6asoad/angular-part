@@ -1,4 +1,5 @@
-<p *ngIf="name; else unset">{{name}}</p>
+<p *ngIf="name; else unset"  class="d-inline-block">{{name}}</p>
+<button *ngIf="name" (click)="unauthorize()" class="ml-5 d-inline-block">Выйти с аккаунта</button>
 <ng-template #unset>  
    <a href="/log-in">войдите в аккаунт</a> 
   </ng-template>   
