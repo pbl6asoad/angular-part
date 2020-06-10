@@ -25,6 +25,7 @@ import { environment } from '../environments/environment';
 import { PostsComponent } from './posts/posts.component'; // Angular CLI environment
 import localeRu from '@angular/common/locales/ru';
 import { PostCreateComponent } from './post-create/post-create.component';
+import { AuthorsComponent } from './authors/authors.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -39,6 +40,7 @@ registerLocaleData(localeRu, 'ru');
     MinimazeProfileComponent,
     PostsComponent,
     PostCreateComponent,
+    AuthorsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,18 +1,76 @@
 <button class="w-25 mx-auto" (click)="createPost()">Create new post</button>
 <div class="container">
   <div class="row">
-    <div class="card text-center col-12 px-0" *ngFor="let post of posts">
-      <div class="card-header">
-        Title: {{ post.title }}
+    Page:
+    <input
+      type="number"
+      max="{{ pages }}"
+      min="1"
+      [(ngModel)]="currentPage"
+      (change)="getPosts()"
+    />
+    of {{ pages }}
+    <input
+      class="ml-auto"
+      type="number"
+      min="1"
+      max="{{ posts.length }}"
+      [(ngModel)]="postsPerPage"
+      (change)="getPosts()"
+    />
+    Posts per page
+    <div
+      id="{{ post.id }}"
+      class="card text-center col-12 px-0"
+      *ngFor="let post of pagePosts"
+    >
+      <ng-template #cardTitle
+        ><div class="card-header">Title: {{ post.title }}</div>
+      </ng-template>
+      <div *ngIf="post.change == true; else cardTitle" class="card-header">
+        Title:
+        <input [(ngModel)]="post.title" />
       </div>
-      <div class="card-body px-0 row">
-        <img src="http://localhost:5000/{{ post.img }}" alt="" class="col-3" />
-        <p class="card-text col-9 text-left">
+      <div *ngIf="posts.length > 0" class="card-body px-0 row">
+        <img
+          src="http://localhost:5000/{{ post.img }}"
+          alt=""
+          class="col-3 px-0"
+        />
+        <ng-template #cardDescription>
+          <div class="card-text col-9 text-left px-0">
             Description: {{ post.description }}
-        </p>
+          </div></ng-template
+        >
+        <div
+          *ngIf="post.change == true; else cardDescription"
+          class="card-text col-9 text-left px-0"
+        >
+          Description:
+          <input [(ngModel)]="post.description" />
+        </div>
       </div>
-      <div class="card-footer text-muted">
+      <div *ngIf="posts.length > 0" class="card-footer text-muted">
         {{ post.time | date: "medium" }}, author: {{ post.author }}
+        <button
+          *ngIf="post.change == true; else cardButton"
+          (click)="save(this.post.id)"
+        >
+          Сохранить
+        </button>
+        <ng-template #cardButton
+          ><button (click)="change(this.post.id)">Изменить</button></ng-template
+        >
+        <span
+          (mouseenter)="mouseEnter(this.post.id)"
+          (mouseleave)="mouseLeave(this.post.id)"
+          (click)="delete(this.post.id)"
+          class="material-icons position-absolute deleteIcon {{
+            this.post.isRed
+          }}"
+        >
+          delete
+        </span>
       </div>
     </div>
   </div>

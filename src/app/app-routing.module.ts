@@ -1,3 +1,4 @@
+import { AuthorsComponent } from './authors/authors.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'posts', component: PostsComponent },
   { path: 'post/create', component: PostCreateComponent },
+  { path: 'authors', component: AuthorsComponent },
   { path: '**', component: ErrorPageComponent },
 ];
 

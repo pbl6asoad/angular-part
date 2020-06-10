@@ -1,0 +1,30 @@
+<!-- <ul *ngFor="let author of authors">
+  <li>{{ author.login }}</li>
+  <ul *ngFor="let post of author.posts">
+    <li>
+      title: {{ post.title }} <br />description: {{ post.description }}
+      <br />time: {{ post.time }} <br />post's id: {{ post.id }}
+    </li>
+  </ul>
+</ul> -->
+
+<table>
+  <thead>
+    <tr>
+      <th (click)="sort($event)">Id</th>
+      <th (click)="sort($event)">Author</th>
+      <th (click)="sort($event)">Title</th>
+      <th (click)="sort($event)">Description</th>
+      <th (click)="sort($event)">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of authors">
+      <td>{{ post.id }}</td>
+      <td>{{ post.author }}</td>
+      <td>{{ post.title }}</td>
+      <td>{{ post.description }}</td>
+      <td>{{ post.time }}</td>
+    </tr>
+  </tbody>
+</table>

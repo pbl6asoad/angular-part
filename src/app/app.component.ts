@@ -18,6 +18,9 @@ export class AppComponent {
       this.isAuthorized = vl
     })
   }
+  hello(string : string){
+    //  alert(string)
+  }
   ngOnInit(): void {
     if ( localStorage.getItem('jwtToken') )  {
       this.login = localStorage.getItem('login')

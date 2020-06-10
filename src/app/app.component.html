@@ -19,9 +19,12 @@
       <a routerLink="/posts" routerLinkActive="active" class="d-block"
         >posts</a
       >
+      <a routerLink="/authors" routerLinkActive="active" class="d-block"
+        >authors</a
+      >
     </mat-menu>
 
-    <app-minimaze-profile style="margin-left: auto;"></app-minimaze-profile>
+    <app-minimaze-profile style="margin-left: auto;" (hello)="hello($event)" [hi]="token"></app-minimaze-profile>
   </div>
 
 <router-outlet></router-outlet>
